@@ -1,32 +1,23 @@
-import {FlatList, SafeAreaView, StatusBar, StyleSheet, View} from "react-native";
-import {FolderCard} from "../components/FolderCard";
-import {Folder} from "../dtos/Folder";
+import {FlatList} from 'react-native';
+import {FolderItem} from '../components/FolderItem';
+import {AddFolderModal} from '../components/AddFolderModal';
+import {useGetFolders} from '../api/folders';
+import {useNavigation} from '@react-navigation/native';
 
 export const Folders = () => {
-    const folders: Folder[] = [
-        {id: 1, name: "Folder 1"},
-        {id: 2, name: "Folder 2"},
-        {id: 3, name: "Folder 3"},
-        {id: 4, name: "Folder 4"},
-        {id: 5, name: "Folder 5"},
-        {id: 6, name: "Folder 6"},
-        {id: 7, name: "Folder 7"},
-        {id: 8, name: "Folder 8"},
-        {id: 9, name: "Folder 9"},
-        {id: 10, name: "Folder 10"}
-    ];
-
+    const {data, refetch, isRefetching} = useGetFolders();
+    const navigation = useNavigation<any>();
+    console.log(navigation.getState());
     return (
-        <FlatList data={folders}
-                  style={styles.container}
-                  renderItem={({item}) => <FolderCard/>}
-                  keyExtractor={(item) => item.id.toString()}/>
+        <>
+            <FlatList data={data}
+                      refreshing={isRefetching} onRefresh={refetch}
+                      renderItem={({item: folder}) => (
+                          <FolderItem folder={folder}
+                                      onPress={() => navigation.navigate('Forms', {folder})}/>
+                      )}
+                      keyExtractor={(item) => item.id.toString()}/>
+            <AddFolderModal/>
+        </>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingHorizontal: 20,
-    }
-})
