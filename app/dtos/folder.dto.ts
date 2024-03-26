@@ -1,7 +1,8 @@
 export interface Folder {
     id: string;
     name: string;
-    created_at: Date;
-    updated_at: Date;
-    visited_at: Date;
+    color: string;
+    created_at: string;
+    updated_at: string;
+    visited_at: string;
 }

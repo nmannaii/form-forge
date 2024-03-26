@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import {Divider, List} from 'react-native-paper';
 import {Folder} from '../dtos/folder.dto';
 import {format} from 'date-fns';
+import {theme} from '../../theme';
 
 interface Props {
     folder: Folder;
@@ -14,8 +15,8 @@ export const FolderItem = ({folder, onPress}: Props) => {
             <List.Item title={folder.name}
                        style={{paddingHorizontal: 20}}
                        onPress={onPress}
-                       description={format(folder.visited_at, `dd MMM yyyy 'at' HH:mm`)}
-                       left={() => <List.Icon icon="folder"/>}/>
+                       description={format(folder.updated_at, `dd MMM yyyy 'at' HH:mm`)}
+                       left={() => <List.Icon icon="folder" color={theme.colors.primary}/>}/>
             <Divider leftInset={true} style={{left: 30}} bold={true}/>
         </>
 

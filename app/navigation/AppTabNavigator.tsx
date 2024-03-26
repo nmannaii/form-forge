@@ -1,4 +1,4 @@
-import {AntDesign} from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigation} from 'react-native-paper';
 import {CommonActions} from '@react-navigation/native';
@@ -65,10 +65,10 @@ export const AppTabNavigator = () => {
                         <AppHeader route={route} options={options} onMenuClick={() => setOpen(true)}/>,
                 }}>
                 <Tab.Screen name="Folders" component={Folders} options={{
-                    tabBarIcon: ({color}) => <AntDesign name="form" size={24} color={color}/>,
+                    tabBarIcon: ({color}) => <MaterialCommunityIcons name="folder" size={24} color={color}/>,
                 }}/>
                 <Tab.Screen name="Documents" component={Documents} options={{
-                    tabBarIcon: ({color}) => <AntDesign name="pdffile1" size={24} color={color}/>
+                    tabBarIcon: ({color}) => <MaterialCommunityIcons name="file-pdf-box" size={24} color={color}/>
                 }}/>
             </Tab.Navigator>
         </Drawer>

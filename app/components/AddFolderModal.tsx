@@ -3,18 +3,18 @@ import {StyleSheet, View} from 'react-native';
 import {useState} from 'react';
 import {theme} from '../../theme';
 import {useSaveFolder} from '../api/folders';
-import {Folder} from '../dtos/folder.dto';
 import {BottomFab} from './BottomFAB';
+import {AddFolderDto} from '../dtos/add-folder.dto';
 
 export const AddFolderModal = () => {
     const untitled = 'Untitled'
     const [isVisible, setVisibility] = useState(false);
     const [folderName, setFolderName] = useState(untitled);
-    const {mutateAsync} = useSaveFolder();
+    const {mutateAsync, isPending} = useSaveFolder();
     const onSubmit = async () => {
         await mutateAsync({
             name: folderName,
-        } as Folder);
+        } as AddFolderDto);
         setVisibility(false);
         setFolderName(untitled);
     }
@@ -38,7 +38,8 @@ export const AddFolderModal = () => {
                     </View>
                     <View style={styles.modalAction}>
                         <Button uppercase={true} icon="close" onPress={() => setVisibility(false)}>Cancel</Button>
-                        <Button uppercase={true} icon="plus" onPress={onSubmit} disabled={!folderName}>Create</Button>
+                        <Button uppercase={true} icon="plus" onPress={onSubmit} loading={isPending}
+                                disabled={!folderName}>Create</Button>
                     </View>
                 </Modal>
             </Portal>

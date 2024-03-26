@@ -1,6 +1,7 @@
 import {createClient} from '@supabase/supabase-js';
+import {Database} from './supabase-types';
 
-export const supabase = createClient(
+export const supabase = createClient<Database>(
     'https://oemfhiueijumizjmhtdy.supabase.co',
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9lbWZoaXVlaWp1bWl6am1odGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA4MzgxMzAsImV4cCI6MjAyNjQxNDEzMH0.q2mRMGYVgjfs_2MVOPgLy5mYcQRkwD1Mivfjipf0O40'
 );
