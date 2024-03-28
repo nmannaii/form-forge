@@ -1,10 +1,11 @@
-import {Button, HelperText, Modal, Portal, TextInput} from 'react-native-paper';
-import {StyleSheet, View} from 'react-native';
+import {Button, HelperText, Portal, TextInput} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
 import {useState} from 'react';
 import {theme} from '../../theme';
 import {useSaveFolder} from '../api/folders';
 import {BottomFab} from './BottomFAB';
 import {AddFolderDto} from '../dtos/add-folder.dto';
+import {FormModal} from './FormModal';
 
 export const AddFolderModal = () => {
     const untitled = 'Untitled'
@@ -22,11 +23,9 @@ export const AddFolderModal = () => {
     return (
         <>
             <Portal>
-                <Modal visible={isVisible}
-                       dismissable={false}
-                       contentContainerStyle={styles.modal}
-                       onDismiss={() => setVisibility(false)}>
-                    <View style={styles.modalContent}>
+                <FormModal isVisible={isVisible}
+                           setVisibility={setVisibility}>
+                    <FormModal.Content>
                         <TextInput value={folderName}
                                    selectTextOnFocus={true}
                                    error={!folderName}
@@ -35,13 +34,13 @@ export const AddFolderModal = () => {
                         {!folderName && <HelperText type="error">
                             Required.
                         </HelperText>}
-                    </View>
-                    <View style={styles.modalAction}>
+                    </FormModal.Content>
+                    <FormModal.Action>
                         <Button uppercase={true} icon="close" onPress={() => setVisibility(false)}>Cancel</Button>
                         <Button uppercase={true} icon="plus" onPress={onSubmit} loading={isPending}
                                 disabled={!folderName}>Create</Button>
-                    </View>
-                </Modal>
+                    </FormModal.Action>
+                </FormModal>
             </Portal>
             <BottomFab onPress={() => setVisibility(true)}/>
         </>

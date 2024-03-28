@@ -21,7 +21,8 @@ export const AddFormModal = ({folderId}: {folderId: string}) => {
                     <Formik initialValues={{name: 'untitled', description: ''}}
                             validationSchema={addFormSchema}
                             onSubmit={(values) => {
-                                saveForm.mutate({...values, folder_id: folderId})
+                                saveForm.mutateAsync({...values, folder_id: folderId})
+                                    .then(() => setVisibility(false))
                             }}>
                         {({
                               handleChange,

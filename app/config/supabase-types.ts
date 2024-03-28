@@ -41,7 +41,7 @@ export type Database = {
           created_at: string
           description: string | null
           folder_id: string
-          id: number
+          id: string
           name: string
           updated_at: string
           visited_at: string
@@ -50,7 +50,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           folder_id?: string
-          id?: number
+          id?: string
           name: string
           updated_at?: string
           visited_at?: string
@@ -59,7 +59,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           folder_id?: string
-          id?: number
+          id?: string
           name?: string
           updated_at?: string
           visited_at?: string
@@ -70,6 +70,41 @@ export type Database = {
             columns: ["folder_id"]
             isOneToOne: false
             referencedRelation: "folder"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      topic: {
+        Row: {
+          created_at: string
+          form_id: string
+          id: string
+          name: string
+          order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          form_id: string
+          id?: string
+          name: string
+          order: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          form_id?: string
+          id?: string
+          name?: string
+          order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_topic_form_id_fkey"
+            columns: ["form_id"]
+            isOneToOne: false
+            referencedRelation: "form"
             referencedColumns: ["id"]
           },
         ]

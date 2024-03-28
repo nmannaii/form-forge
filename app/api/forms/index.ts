@@ -5,7 +5,7 @@ import {AddFormDto} from '../../dtos/add-form.dto';
 
 export const useGetForms = (folderId: string) =>
     useQuery<Form[]>({
-        queryKey: ['forms', folderId],
+        queryKey: ['folder', folderId, 'forms'],
         queryFn: async () => {
             const {data, error} = await supabase
                 .from('form')
@@ -17,6 +17,22 @@ export const useGetForms = (folderId: string) =>
                 throw new Error(error.message)
             }
             return data || [];
+        }
+    })
+
+export const useGetForm = (form_id: string) =>
+    useQuery({
+        queryKey: ['forms', form_id],
+        queryFn: async () => {
+            const {data, error} = await supabase
+                .from('form')
+                .select('id, name, folder!inner(*)')
+                .eq('id', form_id)
+                .single();
+            if (error) {
+                throw new Error(error.message);
+            }
+            return data;
         }
     })
 
@@ -34,8 +50,8 @@ export const useSaveForm = () => {
                 throw new Error(`Error saving folder: ${error.code}#${error.message}`)
             }
         },
-        onSuccess: (_, variables) => queryClient.invalidateQueries({
-            queryKey: ['forms', variables.folder_id]
+        onSuccess: (_, {folder_id}) => queryClient.invalidateQueries({
+            queryKey: ['folder', folder_id, 'forms']
         })
     })
 }
