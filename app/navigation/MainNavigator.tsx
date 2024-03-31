@@ -9,7 +9,7 @@ import {Text} from 'react-native-paper';
 export type RootStackParamList = {
     AppTabNavigator: undefined;
     Forms: { folder: Folder };
-    Form: { form_id: string };
+    Form: { formId: string };
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -28,7 +28,7 @@ export const MainNavigator = () => {
                           options={({route}) => ({
                               presentation: 'modal',
                               headerTitle: ({}) => {
-                                  const {data} = useGetForm(route.params.form_id);
+                                  const {data} = useGetForm(route.params.formId, false);
                                   return <Text variant="headlineSmall">{data?.name}</Text>
                               }
                           })}

@@ -1,11 +1,11 @@
 import {FlatList} from 'react-native';
 import {FolderItem} from '../components/FolderItem';
-import {AddFolderModal} from '../components/AddFolderModal';
 import {useGetFolders, useUpdateFolderVisitedAt} from '../api/folders';
 import {useNavigation} from '@react-navigation/native';
+import {AddFolderModal} from '../components/AddFolderModal';
 
 export const Folders = () => {
-    const {data, refetch, isRefetching} = useGetFolders();
+    const {data, refetch, isRefetching, error} = useGetFolders();
     const {mutate} = useUpdateFolderVisitedAt();
     const navigation = useNavigation<any>();
     return (
@@ -15,7 +15,7 @@ export const Folders = () => {
                       renderItem={({item: folder}) => (
                           <FolderItem folder={folder}
                                       onPress={() => {
-                                          mutate(folder.id)
+                                          mutate(folder.id);
                                           navigation.navigate('Forms', {folder});
                                       }}/>
                       )}

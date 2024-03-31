@@ -12,7 +12,7 @@ export const FormItem = ({form, onPress}: Props) => {
             <List.Item title={form.name}
                        style={{paddingHorizontal: 20}}
                        onPress={onPress}
-                       description={format(form.updated_at, `dd MMM yyyy 'at' HH:mm`)}
+                       description={format(form.updatedAt, `dd MMM yyyy 'at' HH:mm`)}
                        left={() => <List.Icon icon="form-select"/>}/>
             <Divider leftInset={true} style={{left: 30}} bold={true}/>
         </>

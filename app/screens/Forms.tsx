@@ -21,7 +21,7 @@ export const Forms = ({route}: Props) => {
                       refreshing={isRefetching} onRefresh={refetch}
                       renderItem={({item: form}) => (
                           <FormItem form={form}
-                                    onPress={() => navigation.navigate('Form', {form_id: form.id})}/>
+                                    onPress={() => navigation.navigate('Form', {formId: form.id})}/>
                       )}
                       keyExtractor={(item) => item.id.toString()}/>
             <AddFormModal folderId={folder.id}/>

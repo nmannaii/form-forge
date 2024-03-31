@@ -12,7 +12,7 @@ export const AddFormModal = ({folderId}: {folderId: string}) => {
         name: string().required('Form name is required'),
         description: string(),
     });
-    const saveForm = useSaveForm();
+    const {mutateAsync} = useSaveForm();
     return (
         <>
             <Portal>
@@ -21,7 +21,7 @@ export const AddFormModal = ({folderId}: {folderId: string}) => {
                     <Formik initialValues={{name: 'untitled', description: ''}}
                             validationSchema={addFormSchema}
                             onSubmit={(values) => {
-                                saveForm.mutateAsync({...values, folder_id: folderId})
+                                mutateAsync({...values, folderId})
                                     .then(() => setVisibility(false))
                             }}>
                         {({

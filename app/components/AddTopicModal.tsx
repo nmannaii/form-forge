@@ -2,11 +2,13 @@ import {Portal, TextInput} from 'react-native-paper';
 import {FormModal} from './FormModal';
 import {useState} from 'react';
 import {Formik} from 'formik';
+
 interface Props {
     topicOrder: number;
     formId: string;
 
 }
+
 export const AddTopicModal = ({topicOrder}: { topicOrder: number }) => {
     const [isVisible, setVisibility] = useState(false)
     return (
@@ -24,12 +26,12 @@ export const AddTopicModal = ({topicOrder}: { topicOrder: number }) => {
                               handleSubmit,
                               values
                           }) => (
-                              <>
-                                  <FormModal.Content>
-                                      <TextInput label="Name *"/>
-                                  </FormModal.Content>
-                              </>
-                            )
+                            <>
+                                <FormModal.Content>
+                                    <TextInput label="Name *"/>
+                                </FormModal.Content>
+                            </>
+                        )}
                     </Formik>
                 </FormModal.Content>
             </FormModal>

@@ -1,5 +1,5 @@
 export interface AddFormDto {
-    folder_id: string;
+    folderId: string;
     name: string;
     description: string;
 }
